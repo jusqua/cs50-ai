@@ -8,4 +8,4 @@ Don't copy and paste any of these files, try to solve any problems by yourself.
 
 ## Table of Contents
   * Search
-    * [Quiz](quiz0.md)
+    * [Quiz](week0/quiz0.md)
