@@ -11,6 +11,9 @@ EMPTY = None
 
 
 def unused_rooms(board):
+    """
+    Return the number of unused rooms.
+    """
     return [room for row in board for room in row].count(EMPTY)
 
 
@@ -18,9 +21,7 @@ def initial_state():
     """
     Returns starting state of the board.
     """
-    return [[EMPTY, EMPTY, EMPTY],
-            [EMPTY, EMPTY, EMPTY],
-            [EMPTY, EMPTY, EMPTY]]
+    return [[EMPTY, EMPTY, EMPTY], [EMPTY, EMPTY, EMPTY], [EMPTY, EMPTY, EMPTY]]
 
 
 def player(board):
@@ -56,9 +57,17 @@ def winner(board):
     Returns the winner of the game, if there is one.
     """
     for c in range(3):
-        if board[c][0] != EMPTY and board[c][0] == board[c][1] and board[c][1] == board[c][2]:
+        if (
+            board[c][0] != EMPTY
+            and board[c][0] == board[c][1]
+            and board[c][1] == board[c][2]
+        ):
             return board[c][0]
-        elif board[0][c] != EMPTY and board[0][c] == board[1][c] and board[1][c] == board[2][c]:
+        elif (
+            board[0][c] != EMPTY
+            and board[0][c] == board[1][c]
+            and board[1][c] == board[2][c]
+        ):
             return board[0][c]
 
     if board[1][1] != EMPTY:
@@ -87,9 +96,50 @@ def utility(board):
     return 1 if mark == X else -1
 
 
+def min_search(board, alpha=-math.inf, beta=math.inf):
+    """
+    Returns the pair result value and optimal action for the minimum player.
+    """
+    if terminal(board):
+        return utility(board), None
+
+    value = math.inf
+    action = None
+    for a in actions(board):
+        v, _ = max_search(result(board, a), alpha, beta)
+        if v < value:
+            value, action = v, a
+            beta = min(beta, value)
+        if value <= alpha:
+            return value, action
+
+    return value, action
+
+
+def max_search(board, alpha=-math.inf, beta=math.inf):
+    """
+    Returns the pair result value and optimal action for the maximum player.
+    """
+    if terminal(board):
+        return utility(board), None
+
+    value = -math.inf
+    action = None
+    for a in actions(board):
+        v, _ = min_search(result(board, a), alpha, beta)
+        if v > value:
+            value, action = v, a
+            alpha = max(alpha, value)
+        if value >= beta:
+            return value, action
+
+    return value, action
+
+
 def minimax(board):
     """
     Returns the optimal action for the current player on the board.
     """
-    if terminal(board):
-        return None
+    mark = player(board)
+    _, action = max_search(board) if mark == X else min_search(board)
+    return action
