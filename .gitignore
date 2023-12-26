@@ -1,3 +1,5 @@
 .venv/
 __pycache__/
 week0/degrees/**/
+week0/tictactoe/*.ttf
+week0/tictactoe/*.txt
