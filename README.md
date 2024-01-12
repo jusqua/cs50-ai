@@ -1,4 +1,4 @@
-# CS50 AI (2023)
+# CS50 AI (2024)
 
 Before read this repository files, remember the [Academic Honesty](https://cs50.harvard.edu/x/honesty/).
 
