@@ -8,6 +8,5 @@ Don't copy and paste any of these files, try to solve any problems by yourself.
 
 ## Table of Contents
   * Search
-    * [Quiz](week0/quiz0.md)
     * [Degrees](week0/degrees/degrees.py)
     * [Tic Tac Toe](week0/tictactoe/tictactoe.py)
