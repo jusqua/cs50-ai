@@ -35,7 +35,7 @@ def actions(board):
     """
     Returns set of all possible actions (i, j) available on the board.
     """
-    return [(i, j) for i in range(3) for j in range(3) if board[i][j] == EMPTY]
+    return set((i, j) for i in range(3) for j in range(3) if board[i][j] == EMPTY)
 
 
 def result(board, action):
@@ -57,12 +57,14 @@ def winner(board):
     Returns the winner of the game, if there is one.
     """
     for c in range(3):
+        # Checks horizontal matches
         if (
             board[c][0] != EMPTY
             and board[c][0] == board[c][1]
             and board[c][1] == board[c][2]
         ):
             return board[c][0]
+        # Checks vertical matches
         elif (
             board[0][c] != EMPTY
             and board[0][c] == board[1][c]
@@ -70,6 +72,7 @@ def winner(board):
         ):
             return board[0][c]
 
+    # Checks diagonal matches
     if board[1][1] != EMPTY:
         for c in range(0, 3, 2):
             if board[0][c] == board[1][1] and board[1][1] == board[2][2 - c]:
