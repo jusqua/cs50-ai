@@ -10,3 +10,5 @@ Don't copy and paste any of these files, try to solve any problems by yourself.
   * Search
     * [Degrees](week0/degrees/degrees.py)
     * [Tic Tac Toe](week0/tictactoe/tictactoe.py)
+  * Knownledge
+    * [Knights](week1/knights/puzzle.py)
